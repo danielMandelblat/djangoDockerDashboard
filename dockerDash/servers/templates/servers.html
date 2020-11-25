@@ -1,0 +1,47 @@
+{%extends 'base_servers.html'%}
+
+{%block servers%}
+    <a href="{%url 'service_server_update'%}"> <button class="btn btn-primary">Update server service</button> </a>
+    <br><br>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Status</th>
+          <th scope="col">Name</th>
+          <th scope="col">Host</th>
+          <th scope="col">API Port</th>
+          <th scope="col">Install type</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for server in servers%}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>
+            {%if server.status == True%}
+              <div class="spinner-border spinner-border-sm text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <span class="text text-success">Running...</span>
+            {%elif server.status == False%}
+            <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+             <span class="text text-danger">Down</span>
+            {%else%}
+            <div class="spinner-grow spinner-grow-sm text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <span class="text text-danger">Some warning</span>
+            {%endif%}
+          </td>
+          <td>{{server.name}}</td>
+          <td>{{server.host}}</td>
+          <td>{{server.api_port}}</td>
+          <td>{{server.install}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+{%endblock%}

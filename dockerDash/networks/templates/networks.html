@@ -1,0 +1,33 @@
+{%extends 'base_networks.html'%}
+
+{%block networks%}
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        {%for server in  networks_servers%}
+            {%for k,v in server.items%}
+                {%if k != 'data'%}
+                <h3>{{k}}: {{v}}</h3>
+                {%elif k == 'data'%}
+                    {%for v_2 in v%}
+                        {%for k3, v3 in v_2.items%}
+                            <hr>{{k3}}: {{v3}}</hr> <br>
+                        {%endfor%}
+                    {%endfor%}
+                    </br> <br>
+                {%endif%}
+            {%endfor%}
+            <br><br>
+        {%endfor%}
+    </tr>
+  </tbody>
+</table>
+{%endblock%}

@@ -1,0 +1,31 @@
+{%extends 'base_images.html'%}
+
+{%block images%}
+    <table class="table table-hover table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Created</th>
+      <th scope="col">Id</th>
+        <th scope="col">Repo digests</th>
+        <th scope="col">Repo Tags</th>
+        <th scope="col">Size</th>
+        <th scope="col">Virtual size</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {%for image in  images_from_hosts%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{image.Created}}</td>
+        <td>{{image.Id | slice:"15"}}</td>
+        <td>{{image.RepoDigests|slice:"15"}}</td>
+        <td>{{image.RepoTags}}</td>
+        <td>{{image.Size}}</td>
+        <td>{{image.VirtualSize}}</td>
+    </tr>
+  {%endfor%}
+  </tbody>
+</table>
+{%endblock%}

@@ -1,0 +1,66 @@
+{%extends 'base_servers.html'%}
+{% load crispy_forms_tags %}
+{%block servers%}
+    <div class="container">
+        <form id="form" method="post" action="{{request.url}}">
+            {%csrf_token%}
+            {{form | crispy}}
+            <input id="clicker" type="submit" value="Submit" class="btn btn-primary">
+            <div id="spinner" class="spinner-border spinner-border-sm" role="status" hidden="hidden">
+              <span class="sr-only">Loading...</span>
+            </div>
+        </form>
+    </div>
+
+<script>
+    var form = document.getElementById("form");
+    form.onsubmit = function(){
+        document.getElementById("clicker").disabled = true;
+        document.getElementById("spinner").hidden = false;
+    };
+</script>
+
+<!--
+    <script>
+    var username_div =  document.getElementById("div_id_SSH_username");
+    var password_div =  document.getElementById("div_id_SSH_password");
+    var port_div =  document.getElementById("div_id_SSH_port");
+    var api_div =  document.getElementById("div_id_api_port");
+
+    username_div.hidden = true;
+    password_div.hidden = true;
+    port_div.hidden = true;
+    api_div.hidden = true;
+
+    var selection = document.getElementById("id_install");
+    selection.onchange = function(){
+         if (selection.value == 'new' || selection.value == 'docker'){
+                username_div.hidden = false;
+                password_div.hidden = false;
+                port_div.hidden = false;
+                api_div.hidden = true;
+
+                document.getElementById("id_SSH_username").required = true;
+                document.getElementById("id_SSH_password").required = true;
+                document.getElementById("id_SSH_port").required = true;
+                document.getElementById("id_api_port").required = false;
+         }else if (selection.value == 'api'){
+                username_div.hidden = true;
+                password_div.hidden = true;
+                port_div.hidden = true;
+                api_div.hidden = false;
+
+                document.getElementById("id_SSH_username").required = false;
+                document.getElementById("id_SSH_password").required = false;
+                document.getElementById("id_SSH_port").required = false;
+                document.getElementById("id_api_port").required = true;
+         }
+    }
+
+    document.getElementById("form").onsubmit = function(){
+        document.getElementById("spinner").hidden = false;
+    }
+</script>
+-->
+
+{%endblock%}
